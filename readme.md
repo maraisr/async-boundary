@@ -20,15 +20,15 @@ const SuspensfulContainer = () => {
 	return (
 		<AsyncBoundary>
 			<SlowSuspensfulComponent />
-		</AsyncBoundary
+		</AsyncBoundary>
 	);
 };
 
 const SlowSuspensfulComponent = () => {
 	const data = resource.data.read();
 
-	return <h1>{data.thing}</h1>
-}
+	return <h1>{data.thing}</h1>;
+};
 ```
 
 > Please read more about suspense at
