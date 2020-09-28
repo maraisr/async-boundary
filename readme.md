@@ -1,4 +1,4 @@
-# `async-boundary`
+# `<AsyncBoundary>`
 
 [![CI](https://img.shields.io/github/workflow/status/maraisr/async-boundary/CI/main)](https://github.com/maraisr/async-boundary/actions?query=workflow:CI+branch:main)
 
