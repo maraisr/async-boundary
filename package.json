@@ -31,7 +31,7 @@
 	],
 	"scripts": {
 		"build": "rollup -c",
-		"format": "prettier \"{*,tests/*,src/*,bench/*,.github/**/*}.+(ts|js|yml|md)\" --write",
+		"format": "prettier \"{*,tests/*,src/*,bench/*,.github/**/*}.+(tsx|js|yml|md)\" --write",
 		"prepublishOnly": "yarn build",
 		"test": "uvu -r ts-node/register -i util -i prelude tests"
 	},

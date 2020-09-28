@@ -2,7 +2,8 @@
 
 [![CI](https://img.shields.io/github/workflow/status/maraisr/async-boundary/CI/main)](https://github.com/maraisr/async-boundary/actions?query=workflow:CI+branch:main)
 
-> A React async-boundary that couples an error-boundary as well as a suspense container
+> A React async-boundary that couples an error-boundary as well as a suspense
+> container
 
 ## ⚙️ Install
 
@@ -30,17 +31,20 @@ const SlowSuspensfulComponent = () => {
 }
 ```
 
-> Please read more about suspense at [Concurrent React (Suspense for Data Fetching)](https://reactjs.org/docs/concurrent-mode-suspense.html)
+> Please read more about suspense at
+> [Concurrent React (Suspense for Data Fetching)](https://reactjs.org/docs/concurrent-mode-suspense.html)
 
 ## 🔎 API
 
 ### AsyncBoundary: FunctionComponent<Props>
 
 #### Props
-- `fallback`: The `ReactChild` to render whilst Suspending
-- `errorFallback`: The `ReactChild` to render when an error occurred.
-  - Has a `retryFn` callback passed to it, calling it will remount the `<AsyncBoundary>` children.
-- `onError`: The `componentDidCatch` callback.
+
+-   `fallback`: The `ReactChild` to render whilst Suspending
+-   `errorFallback`: The `ReactChild` to render when an error occurred.
+    -   Has a `retryFn` callback passed to it, calling it will remount the
+        `<AsyncBoundary>` children.
+-   `onError`: The `componentDidCatch` callback.
 
 ## License
 
