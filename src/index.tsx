@@ -5,7 +5,7 @@ import type {
 	ReactChild,
 } from 'react';
 import * as React from 'react';
-import { Component, Suspense } from "react";
+import { Component, Suspense } from 'react';
 
 type ErrorFallbackComponent = ComponentType<{ retryFn?(): void }>;
 
