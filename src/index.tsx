@@ -5,7 +5,7 @@ import type {
 	ReactChild,
 } from 'react';
 import * as React from 'react';
-import { PureComponent, Suspense } from 'react';
+import { Component, Suspense } from "react";
 
 type ErrorFallbackComponent = ComponentType<{ retryFn?(): void }>;
 
@@ -15,7 +15,7 @@ interface Props {
 	errorFallback?: ErrorFallbackComponent;
 }
 
-class ErrorBoundary extends PureComponent<
+class ErrorBoundary extends Component<
 	{ fallback?: ErrorFallbackComponent; onError?: Props['onError'] },
 	{ error: Error | null }
 > {
@@ -28,7 +28,7 @@ class ErrorBoundary extends PureComponent<
 	}
 
 	componentDidCatch(error, errorInfo) {
-		this.props?.onError(error, errorInfo);
+		this.props.onError?.(error, errorInfo);
 	}
 
 	retryFn = () => {
