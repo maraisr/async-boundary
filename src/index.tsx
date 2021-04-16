@@ -28,7 +28,7 @@ class ErrorBoundary extends PureComponent<
 	}
 
 	componentDidCatch(error, errorInfo) {
-		this.props.onError(error, errorInfo);
+		this.props?.onError(error, errorInfo);
 	}
 
 	retryFn = () => {
