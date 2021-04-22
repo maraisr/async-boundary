@@ -1,6 +1,6 @@
 # `<AsyncBoundary>`
 
-[![CI](https://img.shields.io/github/workflow/status/maraisr/async-boundary/CI/main)](https://github.com/maraisr/async-boundary/actions?query=workflow:CI+branch:main)
+[![CI](https://github.com/maraisr/async-boundary/actions/workflows/ci.yml/badge.svg)](https://github.com/maraisr/async-boundary/actions/workflows/ci.yml)
 
 > A React async-boundary that couples an error-boundary as well as a suspense
 > container

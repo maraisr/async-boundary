@@ -36,4 +36,4 @@ jobs:
                   yarn --frozen-lockfile;
 
             - name: Compile
-              run: yarn build
+              run: yarn build;
