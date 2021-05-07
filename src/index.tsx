@@ -7,7 +7,7 @@ import type {
 import * as React from 'react';
 import { Component, Suspense } from 'react';
 
-export type ErrorFallbackComponent = ComponentType<{
+export type ErrorFallbackComponentType = ComponentType<{
 	retryFn?(): void;
 	error: Error | null;
 }>;
@@ -15,11 +15,11 @@ export type ErrorFallbackComponent = ComponentType<{
 interface Props {
 	fallback?: ReactChild;
 	onError?: ComponentLifecycle<Props, unknown>['componentDidCatch'];
-	errorFallback?: ErrorFallbackComponent;
+	errorFallback?: ErrorFallbackComponentType;
 }
 
 class ErrorBoundary extends Component<
-	{ fallback?: ErrorFallbackComponent; onError?: Props['onError'] },
+	{ fallback?: ErrorFallbackComponentType; onError?: Props['onError'] },
 	{ error: Error | null }
 > {
 	state = {
@@ -39,7 +39,8 @@ class ErrorBoundary extends Component<
 	};
 
 	render() {
-		const ErrorFallback = this.props.fallback ?? ErrorFallbackComponent;
+		const ErrorFallback =
+			this.props.fallback ?? DefaultErrorFallbackComponent;
 		return this.state.error ? (
 			<ErrorFallback retryFn={this.retryFn} error={this.state.error} />
 		) : (
@@ -48,21 +49,23 @@ class ErrorBoundary extends Component<
 	}
 }
 
-const ErrorFallbackComponent: ErrorFallbackComponent = ({ retryFn }) => {
-	return (
-		<p>
-			An error has occurred, <button onClick={retryFn}>click here</button>{' '}
-			to try again.
-		</p>
-	);
-};
+export const DefaultErrorFallbackComponent: ErrorFallbackComponentType = ({
+	retryFn,
+	error,
+}) => (
+	<p>
+		An error has occurred, <button onClick={retryFn}>click here</button> to
+		try again.
+		{error ? <pre>{error.message}</pre> : null}
+	</p>
+);
 
-const Fallback = <span>loading...</span>;
+export const DefaultFallback = <span>loading...</span>;
 
 export const AsyncBoundary: FunctionComponent<Props> = ({
 	children,
 	onError,
-	fallback = Fallback,
+	fallback = DefaultFallback,
 	errorFallback,
 }) => (
 	<ErrorBoundary fallback={errorFallback} onError={onError}>
