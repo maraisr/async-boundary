@@ -1,6 +1,6 @@
 {
 	"name": "async-boundary",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"description": "A React async-boundary that couples an error-boundary as well as a suspense container",
 	"keywords": [
 		"suspense",
