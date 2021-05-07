@@ -7,7 +7,10 @@ import type {
 import * as React from 'react';
 import { Component, Suspense } from 'react';
 
-type ErrorFallbackComponent = ComponentType<{ retryFn?(): void }>;
+export type ErrorFallbackComponent = ComponentType<{
+	retryFn?(): void;
+	error: Error | null;
+}>;
 
 interface Props {
 	fallback?: ReactChild;
@@ -38,7 +41,7 @@ class ErrorBoundary extends Component<
 	render() {
 		const ErrorFallback = this.props.fallback ?? ErrorFallbackComponent;
 		return this.state.error ? (
-			<ErrorFallback retryFn={this.retryFn} />
+			<ErrorFallback retryFn={this.retryFn} error={this.state.error} />
 		) : (
 			this.props.children
 		);
