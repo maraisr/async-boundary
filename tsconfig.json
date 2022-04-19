@@ -9,6 +9,6 @@
 			"async-boundary": ["./src/index.d.ts"]
 		}
 	},
-	"include": ["src"],
+	"include": [ "src/*.d.ts", "src"],
 	"exclude": ["node_modules"]
 }

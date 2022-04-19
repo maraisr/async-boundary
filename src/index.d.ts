@@ -1,4 +1,4 @@
-import type { ComponentType, ReactNode, FunctionComponent, ElementType } from "react";
+import type { ComponentLifecycle, ReactNode, FunctionComponent, ElementType } from "react";
 
 export type ErrorFallbackComponentType = ElementType<{
 	retryFn?(): void;

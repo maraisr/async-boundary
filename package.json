@@ -30,12 +30,13 @@
 		"types"
 	],
 	"scripts": {
-		"build": "bundt --minify",
+		"build": "bundt",
 		"format": "prettier \"{*,src/*,bench/*,.github/**/*}.+(tsx|js|yml|md)\" --write"
 	},
 	"devDependencies": {
 		"@marais/tsconfig": "0.0.2",
 		"@types/react": "18.0.5",
+		"bundt": "2.0.0-next.2",
 		"prettier": "2.6.2",
 		"react": "18.0.0",
 		"typescript": "4.6.3"
@@ -48,5 +49,8 @@
 	},
 	"volta": {
 		"node": "16.14.2"
+	},
+	"dependencies": {
+		"async-boundary": "link:"
 	}
 }
