@@ -2,8 +2,7 @@
 
 [![CI](https://github.com/maraisr/async-boundary/actions/workflows/ci.yml/badge.svg)](https://github.com/maraisr/async-boundary/actions/workflows/ci.yml)
 
-> A React async-boundary that couples an error-boundary as well as a suspense
-> container
+> A React async-boundary that couples an error-boundary as well as a suspense container
 
 ## ⚙️ Install
 
@@ -17,17 +16,17 @@ yarn add async-boundary
 import { AsyncBoundary } from 'async-boundary';
 
 const SuspensfulContainer = () => {
-	return (
-		<AsyncBoundary>
-			<SlowSuspensfulComponent />
-		</AsyncBoundary>
-	);
+  return (
+    <AsyncBoundary>
+      <SlowSuspensfulComponent />
+    </AsyncBoundary>
+  );
 };
 
 const SlowSuspensfulComponent = () => {
-	const data = resource.data.read();
+  const data = resource.data.read();
 
-	return <h1>{data.thing}</h1>;
+  return <h1>{data.thing}</h1>;
 };
 ```
 
@@ -40,11 +39,10 @@ const SlowSuspensfulComponent = () => {
 
 #### Props
 
--   `fallback`: The `ReactChild` to render whilst Suspending
--   `errorFallback`: The `ReactChild` to render when an error occurred.
-    -   Has a `retryFn` callback passed to it, calling it will remount the
-        `<AsyncBoundary>` children.
--   `onError`: The `componentDidCatch` callback.
+- `fallback`: The `ReactChild` to render whilst Suspending
+- `errorFallback`: The `ReactChild` to render when an error occurred.
+  - Has a `retryFn` callback passed to it, calling it will remount the `<AsyncBoundary>` children.
+- `onError`: The `componentDidCatch` callback.
 
 ## License
 

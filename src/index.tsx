@@ -1,55 +1,19 @@
-import type {
-	ComponentLifecycle,
-	ComponentType,
-	FunctionComponent,
-	ReactChild,
-} from 'react';
-import * as React from 'react';
 import { Component, Suspense } from 'react';
+import type { ComponentProps, ReactNode } from 'react';
 
-export type ErrorFallbackComponentType = ComponentType<{
-	retryFn?(): void;
-	error: Error | null;
-}>;
+import type {
+	AsyncBoundaryComponent,
+	ErrorFallbackComponentType,
+} from 'async-boundary';
 
-interface Props {
-	fallback?: ReactChild;
-	onError?: ComponentLifecycle<Props, unknown>['componentDidCatch'];
-	errorFallback?: ErrorFallbackComponentType;
-}
+type Props = {
+	fallback?: ErrorFallbackComponentType;
+	onError?: ComponentProps<AsyncBoundaryComponent>['onError'];
+	children?: ReactNode;
+};
+type State = { error: Error | null };
 
-class ErrorBoundary extends Component<
-	{ fallback?: ErrorFallbackComponentType; onError?: Props['onError'] },
-	{ error: Error | null }
-> {
-	state = {
-		error: null,
-	};
-
-	static getDerivedStateFromError(error) {
-		return { error: error ?? null };
-	}
-
-	componentDidCatch(error, errorInfo) {
-		this.props.onError?.(error, errorInfo);
-	}
-
-	retryFn = () => {
-		this.setState((prev) => ({ ...prev, error: null }));
-	};
-
-	render() {
-		const ErrorFallback =
-			this.props.fallback ?? DefaultErrorFallbackComponent;
-		return this.state.error ? (
-			<ErrorFallback retryFn={this.retryFn} error={this.state.error} />
-		) : (
-			this.props.children
-		);
-	}
-}
-
-export const DefaultErrorFallbackComponent: ErrorFallbackComponentType = ({
+const DefaultErrorFallbackComponent: ErrorFallbackComponentType = ({
 	retryFn,
 	error,
 }) => (
@@ -60,9 +24,39 @@ export const DefaultErrorFallbackComponent: ErrorFallbackComponentType = ({
 	</p>
 );
 
-export const DefaultFallback = <span>loading...</span>;
+class ErrorBoundary extends Component<Props, State> {
+	state = {
+		error: null,
+	};
 
-export const AsyncBoundary: FunctionComponent<Props> = ({
+	static getDerivedStateFromError(error: Error) {
+		return { error: error ?? null };
+	}
+
+	componentDidCatch(error: Error, errorInfo: unknown) {
+		this.props.onError?.(error, errorInfo);
+	}
+
+	retryFn = () => {
+		this.setState({ error: null });
+	};
+
+	render() {
+		const { children, fallback } = this.props;
+
+		const Fallback = fallback ?? DefaultErrorFallbackComponent;
+
+		return this.state.error ? (
+			<Fallback retryFn={this.retryFn} error={this.state.error} />
+		) : (
+			children
+		);
+	}
+}
+
+const DefaultFallback = <span>loading...</span>;
+
+export const AsyncBoundary: AsyncBoundaryComponent = ({
 	children,
 	onError,
 	fallback = DefaultFallback,

@@ -19,10 +19,10 @@
 		".": {
 			"import": "./dist/index.mjs",
 			"require": "./dist/index.js"
-		}
+		},
+		"./package.json": "./package.json"
 	},
 	"main": "dist/index.js",
-	"unpkg": "dist/index.min.js",
 	"module": "dist/index.mjs",
 	"types": "types/index.d.ts",
 	"files": [
@@ -30,41 +30,23 @@
 		"types"
 	],
 	"scripts": {
-		"build": "rollup -c",
-		"format": "prettier \"{*,src/*,bench/*,.github/**/*}.+(tsx|js|yml|md)\" --write",
-		"prepublishOnly": "yarn build"
-	},
-	"prettier": {
-		"bracketSpacing": true,
-		"printWidth": 80,
-		"proseWrap": "always",
-		"singleQuote": true,
-		"tabWidth": 4,
-		"trailingComma": "all",
-		"useTabs": true
+		"build": "bundt --minify",
+		"format": "prettier \"{*,src/*,bench/*,.github/**/*}.+(tsx|js|yml|md)\" --write"
 	},
 	"devDependencies": {
-		"@marais/tsconfig": "^0.0.1",
-		"@rollup/plugin-commonjs": "^18.0.0",
-		"@rollup/plugin-node-resolve": "11.2.1",
-		"@types/node": "^14.14.41",
-		"@types/react": "^17.0.3",
-		"prettier": "^2.2.1",
-		"react": "^17.0.2",
-		"rollup": "2.45.2",
-		"rollup-plugin-terser": "7.0.2",
-		"rollup-plugin-typescript2": "0.30.0",
-		"ts-node": "^9.1.1",
-		"typescript": "^4.2.4"
+		"@marais/tsconfig": "0.0.2",
+		"@types/react": "18.0.5",
+		"prettier": "2.6.2",
+		"react": "18.0.0",
+		"typescript": "4.6.3"
 	},
 	"peerDependencies": {
-		"react": ">= 16"
+		"react": ">=16"
 	},
 	"engines": {
-		"node": ">= 10"
+		"node": ">=14"
 	},
 	"volta": {
-		"node": "16.0.0",
-		"yarn": "1.22.10"
+		"node": "16.14.2"
 	}
 }
